@@ -1,12 +1,784 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/">
-  <script>window.location.href = "/";</script>
-  <title>GIAIC Student Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Hub</title>
+  <meta name="description" content="Official Student Companion App for Governor Sindh IT Initiative (GIAIC) and Panaversity.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            giaic: {
+              navy: '#0B132B',
+              surface: '#1C2541',
+              card: '#243256',
+              cyan: '#0284C7',
+              emerald: '#10B981',
+              green: '#059669',
+              blue: '#2563EB',
+              violet: '#8B5CF6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
 </head>
-<body>
-  <p>Redirecting to <a href="/">GIAIC Student Hub</a>...</p>
+<body class="bg-[#0B132B] text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
+
+  <!-- Header / Navigation Bar -->
+  <header class="sticky top-0 z-50 bg-[#0B132B]/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+          <i data-lucide="graduation-cap" class="w-6 h-6 text-white"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="font-bold text-lg text-white leading-tight">GIAIC Student Hub</h1>
+            <span class="px-2 py-0.5 text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded">PANAVERSITY</span>
+          </div>
+          <p class="text-xs text-slate-400 hidden sm:block">Governor Sindh IT Initiative &bull; Agentic AI Portal</p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center space-x-3">
+        <div class="hidden md:flex items-center space-x-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-400 text-xs font-semibold">
+          <i data-lucide="flame" class="w-4 h-4 text-amber-500"></i>
+          <span>14 Day Streak</span>
+        </div>
+
+        <button onclick="switchTab('ai-study')" class="flex items-center space-x-2 px-3.5 py-1.5 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white text-xs font-semibold rounded-lg shadow-md transition">
+          <i data-lucide="sparkles" class="w-4 h-4"></i>
+          <span>Ask AI Assistant</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden pt-8 pb-6 border-b border-slate-800/80 bg-gradient-to-b from-[#0B132B] via-[#111C3D] to-[#0B132B]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="space-y-4 max-w-2xl">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Quarter 3 Active: Agentic & Robotic AI</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Master Autonomous AI & Panaversity Specifications
+          </h2>
+          <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+            All-in-one companion for GIAIC students: official Panaversity documents, chapter-wise learning, interactive quizzes, TypeScript coding lab, and an AI study assistant with Roman Urdu support.
+          </p>
+
+          <div class="flex flex-wrap gap-3 pt-2">
+            <button onclick="switchTab('panaversity')" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl flex items-center space-x-2 transition shadow-lg shadow-blue-600/25">
+              <i data-lucide="book-open" class="w-4 h-4"></i>
+              <span>Explore Curriculum</span>
+            </button>
+            <button onclick="switchTab('coding-lab')" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-sm font-semibold rounded-xl flex items-center space-x-2 transition">
+              <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+              <span>Launch Coding Lab</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Student Profile Card Preview -->
+        <div class="w-full lg:w-80 bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5 shadow-2xl">
+          <div class="flex items-center space-x-3 mb-4 pb-4 border-b border-slate-700/60">
+            <div class="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center font-bold text-emerald-400 text-lg">
+              MA
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-sm">Muhammad Afnan</h3>
+              <p class="text-xs text-slate-400">Roll: GIAIC-00284719 &bull; Karachi</p>
+            </div>
+          </div>
+          <div class="space-y-3 text-xs">
+            <div class="flex justify-between items-center text-slate-300">
+              <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i> Completed Modules</span>
+              <span class="font-bold text-white">18 / 24</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2">
+              <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-2 rounded-full" style="width: 75%"></div>
+            </div>
+            <div class="flex justify-between pt-1 text-slate-400">
+              <span>Overall Score: <strong class="text-emerald-400">92%</strong></span>
+              <span>Class Rank: <strong class="text-blue-400">Top 5%</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Navigation Tabs -->
+  <div class="bg-[#111C3D] border-b border-slate-800 sticky top-16 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex space-x-1 sm:space-x-4 overflow-x-auto py-2.5 text-xs sm:text-sm font-medium scrollbar-none">
+        <button onclick="switchTab('panaversity')" id="tab-btn-panaversity" class="tab-btn px-4 py-2 rounded-xl text-white bg-blue-600/30 border border-blue-500/40 font-semibold flex items-center space-x-2 whitespace-nowrap">
+          <i data-lucide="book-marked" class="w-4 h-4 text-blue-400"></i>
+          <span>Panaversity Specs</span>
+        </button>
+        <button onclick="switchTab('curriculum')" id="tab-btn-curriculum" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 font-medium flex items-center space-x-2 whitespace-nowrap">
+          <i data-lucide="layers" class="w-4 h-4"></i>
+          <span>Curriculum</span>
+        </button>
+        <button onclick="switchTab('ai-study')" id="tab-btn-ai-study" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 font-medium flex items-center space-x-2 whitespace-nowrap">
+          <i data-lucide="bot" class="w-4 h-4 text-violet-400"></i>
+          <span>AI Study Assistant</span>
+        </button>
+        <button onclick="switchTab('coding-lab')" id="tab-btn-coding-lab" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 font-medium flex items-center space-x-2 whitespace-nowrap">
+          <i data-lucide="terminal" class="w-4 h-4 text-emerald-400"></i>
+          <span>Coding Lab</span>
+        </button>
+        <button onclick="switchTab('quizzes')" id="tab-btn-quizzes" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 font-medium flex items-center space-x-2 whitespace-nowrap">
+          <i data-lucide="award" class="w-4 h-4 text-amber-400"></i>
+          <span>Practice Quizzes</span>
+        </button>
+        <button onclick="switchTab('assignments')" id="tab-btn-assignments" class="tab-btn px-4 py-2 rounded-xl text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 font-medium flex items-center space-x-2 whitespace-nowrap">
+          <i data-lucide="check-square" class="w-4 h-4"></i>
+          <span>Assignments</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex-1">
+
+    <!-- Tab 1: Panaversity Hub -->
+    <div id="tab-panaversity" class="tab-content space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="file-check-2" class="w-5 h-5 text-blue-400"></i>
+            Official Panaversity Specifications & Architecture
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-400">Core required reading for Quarter 3 Certified Agentic and Robotic AI Engineers.</p>
+        </div>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs rounded-full font-medium w-fit">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Verified GIAIC Curriculum
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Card 1: Agent Factory -->
+        <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5 hover:border-blue-500/50 transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 text-[11px] font-bold bg-blue-500/20 text-blue-400 rounded-md border border-blue-500/30">Official Spec</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 14 min read</span>
+            </div>
+            <h4 class="text-base font-bold text-white">The Agent Factory Architectural Pattern</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Industrializing autonomous intelligence through deterministic tool manifests, typed JSON-schema contracts, and dual sandboxing.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Sandboxing</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">JSON Schema</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Deterministic Execution</span>
+            </div>
+          </div>
+          <button onclick="readSpec('agent-factory')" class="mt-4 w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl flex items-center justify-center space-x-2 border border-slate-700 transition">
+            <span>Read Specification</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Card 2: Context Engineering -->
+        <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5 hover:border-emerald-500/50 transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 text-[11px] font-bold bg-emerald-500/20 text-emerald-400 rounded-md border border-emerald-500/30">Official Spec</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 18 min read</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Context Engineering & Memory Management</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Managing finite token windows through hierarchical rolling summaries, semantic vector retrieval (RAG), and working memory caching.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Vector RAG</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Rolling Summary</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Token Budgets</span>
+            </div>
+          </div>
+          <button onclick="readSpec('context-engineering')" class="mt-4 w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl flex items-center justify-center space-x-2 border border-slate-700 transition">
+            <span>Read Specification</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Card 3: Spec-Driven Development -->
+        <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5 hover:border-violet-500/50 transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 text-[11px] font-bold bg-violet-500/20 text-violet-400 rounded-md border border-violet-500/30">Official Spec</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 12 min read</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Spec-Driven Development for Agentic Systems</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Why code generation without formal specifications fails in production. How to define deterministic invariants and boundary test suites.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Spec-First</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Invariants</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Automated QA</span>
+            </div>
+          </div>
+          <button onclick="readSpec('spec-driven')" class="mt-4 w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl flex items-center justify-center space-x-2 border border-slate-700 transition">
+            <span>Read Specification</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Card 4: Seven Principles -->
+        <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5 hover:border-amber-500/50 transition flex flex-col justify-between">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="px-2.5 py-1 text-[11px] font-bold bg-amber-500/20 text-amber-400 rounded-md border border-amber-500/30">Official Spec</span>
+              <span class="text-xs text-slate-400 flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 15 min read</span>
+            </div>
+            <h4 class="text-base font-bold text-white">Seven Principles of Agentic Engineering</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Foundational axioms for building non-hallucinating, robust multi-agent systems and humanoid robotics orchestrations.
+            </p>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Guardrails</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">Human-In-The-Loop</span>
+              <span class="px-2 py-0.5 text-[10px] bg-slate-800 text-slate-300 rounded">State Machines</span>
+            </div>
+          </div>
+          <button onclick="readSpec('seven-principles')" class="mt-4 w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-xl flex items-center justify-center space-x-2 border border-slate-700 transition">
+            <span>Read Specification</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: Curriculum -->
+    <div id="tab-curriculum" class="tab-content hidden space-y-6">
+      <div>
+        <h3 class="text-xl font-bold text-white">Quarter 3: Agentic and Robotic AI Track</h3>
+        <p class="text-xs sm:text-sm text-slate-400">Official syllabus roadmap with progress and learning outcomes.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Module 1 -->
+        <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-700/60">
+            <div>
+              <span class="text-xs font-bold text-emerald-400">MODULE 1 &bull; COMPLETED</span>
+              <h4 class="text-base font-bold text-white">Foundations of Autonomous Agents & OODA Loop</h4>
+            </div>
+            <span class="text-xs text-slate-300 bg-slate-800 px-3 py-1 rounded-full w-fit">4 Lessons &bull; 100%</span>
+          </div>
+          <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+            Understanding the Observe-Orient-Decide-Act (OODA) loop, reactive vs. deliberative agents, and deterministic tool dispatching.
+          </p>
+        </div>
+
+        <!-- Module 2 -->
+        <div class="bg-[#1C2541] border border-blue-500/40 rounded-2xl p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-700/60">
+            <div>
+              <span class="text-xs font-bold text-blue-400">MODULE 2 &bull; IN PROGRESS</span>
+              <h4 class="text-base font-bold text-white">Agent Factory: Industrializing Agent Generation</h4>
+            </div>
+            <span class="text-xs text-blue-300 bg-blue-500/20 px-3 py-1 rounded-full w-fit">5 Lessons &bull; 60%</span>
+          </div>
+          <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+            Designing self-assembling agent pipelines, validation contracts using Zod/Pydantic, and sandboxed test environments.
+          </p>
+        </div>
+
+        <!-- Module 3 -->
+        <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-5">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-700/60">
+            <div>
+              <span class="text-xs font-bold text-slate-400">MODULE 3 &bull; UPCOMING</span>
+              <h4 class="text-base font-bold text-white">Multi-Agent Swarms & Hierarchical Delegation</h4>
+            </div>
+            <span class="text-xs text-slate-400 bg-slate-800 px-3 py-1 rounded-full w-fit">6 Lessons &bull; 0%</span>
+          </div>
+          <p class="text-xs text-slate-300 mt-3 leading-relaxed">
+            Orchestrating supervisor-worker architectures, conflict resolution, consensus protocols, and long-horizon tasks.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: AI Study Assistant -->
+    <div id="tab-ai-study" class="tab-content hidden space-y-6">
+      <div>
+        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-5 h-5 text-violet-400"></i>
+          AI Study Companion (GIAIC & Panaversity Grounded)
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-400">Get instant concept breakdowns, analogies, and explanations in English or Roman Urdu.</p>
+      </div>
+
+      <!-- Quick Prompt Pills -->
+      <div class="flex flex-wrap gap-2 text-xs">
+        <button onclick="setAiPrompt('Agent Factory pattern kya hota hai simple Roman Urdu mein samjhayein?')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300">
+          🇵🇰 Roman Urdu mein Agent Factory samjhayein
+        </button>
+        <button onclick="setAiPrompt('What is the difference between Reactive and Deliberative agents?')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300">
+          ⚡ Reactive vs Deliberative Agents
+        </button>
+        <button onclick="setAiPrompt('Give me a 5-question MCQ practice quiz on Context Engineering.')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-slate-300">
+          📝 5 MCQs on Context Engineering
+        </button>
+      </div>
+
+      <!-- Chat Window -->
+      <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl overflow-hidden flex flex-col h-[480px]">
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs sm:text-sm">
+          <!-- Assistant Message -->
+          <div class="flex items-start space-x-3 max-w-2xl">
+            <div class="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center flex-shrink-0 text-white">
+              <i data-lucide="bot" class="w-4 h-4"></i>
+            </div>
+            <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-2xl rounded-tl-none space-y-2">
+              <p class="font-semibold text-violet-300 text-xs">GIAIC AI Study Mentor</p>
+              <p class="text-slate-200 leading-relaxed">
+                Assalam-o-Alaikum! Main aapka GIAIC & Panaversity AI Study Companion hoon. Aap Agent Factory, Context Engineering, TypeScript specs ya code optimization ke bare mein kuch bhi pooch sakte hain.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-3 bg-[#111C3D] border-t border-slate-800 flex items-center gap-2">
+          <input id="chat-input" type="text" placeholder="Panaversity concept ya sawal yahan likhein..." class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-100 focus:outline-none focus:border-violet-500">
+          <button onclick="sendChatMessage()" class="px-4 py-2.5 bg-violet-600 hover:bg-violet-500 text-white rounded-xl text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition">
+            <span>Send</span>
+            <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Coding Lab -->
+    <div id="tab-coding-lab" class="tab-content hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="terminal" class="w-5 h-5 text-emerald-400"></i>
+            Interactive Coding Lab (TypeScript & Python)
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-400">Run code, test agent tools, and inspect deterministic schema outputs.</p>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="loadCodeSnippet('ooda')" class="px-3 py-1.5 bg-slate-800 text-xs text-slate-300 hover:bg-slate-700 rounded-lg">OODA Loop</button>
+          <button onclick="loadCodeSnippet('schema')" class="px-3 py-1.5 bg-slate-800 text-xs text-slate-300 hover:bg-slate-700 rounded-lg">Zod Tool Schema</button>
+        </div>
+      </div>
+
+      <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl overflow-hidden">
+        <div class="bg-[#111C3D] px-4 py-2.5 border-b border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            <span class="text-xs text-slate-400 font-mono ml-2">agent_ooda_runner.ts</span>
+          </div>
+          <button onclick="runCodeSimulation()" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition">
+            <i data-lucide="play" class="w-3 h-3"></i>
+            <span>Run Code</span>
+          </button>
+        </div>
+        <textarea id="code-editor" class="w-full h-64 bg-[#0B132B] p-4 font-mono text-xs text-emerald-300 focus:outline-none resize-none leading-relaxed" spellcheck="false">// Panaversity Agent Factory: OODA Loop Runner
+interface AgentTool {
+  name: string;
+  execute: (input: any) => Promise<any>;
+}
+
+class AutonomousAgent {
+  constructor(private name: string, private tools: Map<string, AgentTool>) {}
+
+  async runOodaCycle(goal: string) {
+    console.log(`[OBSERVE] Goal: ${goal}`);
+    console.log(`[ORIENT] Evaluating context and token budget...`);
+    console.log(`[DECIDE] Selected tool: deterministic_retriever`);
+    console.log(`[ACT] Tool executed cleanly with validated output.`);
+    return { status: "SUCCESS", steps: 4 };
+  }
+}
+
+const agent = new AutonomousAgent("FactoryAgent-01", new Map());
+agent.runOodaCycle("Synthesize Q3 Panaversity Specification");
+</textarea>
+        <!-- Console Output -->
+        <div class="p-3 bg-[#111C3D] border-t border-slate-800 font-mono text-[11px] text-slate-300">
+          <div class="text-slate-400 mb-1">Terminal Console:</div>
+          <div id="code-console" class="text-emerald-400">Ready to execute. Click "Run Code" above.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 5: Practice Quizzes -->
+    <div id="tab-quizzes" class="tab-content hidden space-y-6">
+      <div>
+        <h3 class="text-xl font-bold text-white">Quarter 3 Assessment & Practice Quizzes</h3>
+        <p class="text-xs sm:text-sm text-slate-400">Test your mastery of Panaversity Agentic Engineering.</p>
+      </div>
+
+      <div class="bg-[#1C2541] border border-slate-700/80 rounded-2xl p-6 space-y-5">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-700">
+          <div>
+            <span class="text-xs text-blue-400 font-bold">QUESTION 1 OF 3</span>
+            <h4 class="text-base font-bold text-white mt-1">In the Agent Factory architecture, what is the primary purpose of deterministic tool manifests?</h4>
+          </div>
+          <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-xs rounded-full border border-amber-500/30">10 Pts</span>
+        </div>
+
+        <div class="space-y-2.5" id="quiz-options">
+          <button onclick="selectQuizOption(this, false)" class="w-full text-left p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm text-slate-200 transition">
+            A. To allow LLMs to write random code without safety restrictions.
+          </button>
+          <button onclick="selectQuizOption(this, true)" class="w-full text-left p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm text-slate-200 transition">
+            B. To enforce strict typed JSON-schema contracts preventing hallucinated parameters.
+          </button>
+          <button onclick="selectQuizOption(this, false)" class="w-full text-left p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm text-slate-200 transition">
+            C. To bypass user approval during destructive filesystem actions.
+          </button>
+          <button onclick="selectQuizOption(this, false)" class="w-full text-left p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-xs sm:text-sm text-slate-200 transition">
+            D. To reduce model token count to zero.
+          </button>
+        </div>
+
+        <div id="quiz-feedback" class="hidden p-3 rounded-xl text-xs"></div>
+      </div>
+    </div>
+
+    <!-- Tab 6: Assignments -->
+    <div id="tab-assignments" class="tab-content hidden space-y-6">
+      <div>
+        <h3 class="text-xl font-bold text-white">Assignments & Submissions</h3>
+        <p class="text-xs sm:text-sm text-slate-400">Quarter 3 coursework tasks and deadlines.</p>
+      </div>
+
+      <div class="space-y-3">
+        <div class="bg-[#1C2541] border border-amber-500/40 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 text-[10px] bg-amber-500/20 text-amber-400 rounded font-bold">DUE IN 3 DAYS</span>
+              <h4 class="font-bold text-white text-sm">Build an Autonomous Spec-Driven Research Agent</h4>
+            </div>
+            <p class="text-xs text-slate-400">Implement an agent pipeline that reads a markdown spec and produces validated TypeScript types.</p>
+          </div>
+          <span class="px-4 py-1.5 bg-amber-600/20 text-amber-300 border border-amber-500/30 rounded-xl text-xs font-semibold text-center">In Progress</span>
+        </div>
+
+        <div class="bg-[#1C2541] border border-emerald-500/40 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-400 rounded font-bold">COMPLETED</span>
+              <h4 class="font-bold text-white text-sm">Context Window Token Budget Calculator</h4>
+            </div>
+            <p class="text-xs text-slate-400">Calculated hierarchical token limits and compression thresholds using tiktoken.</p>
+          </div>
+          <span class="px-4 py-1.5 bg-emerald-600/20 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-semibold text-center">Score: 100/100</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Spec Modal Dialog -->
+  <div id="spec-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-[#1C2541] border border-slate-700 rounded-2xl max-w-2xl w-full max-h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-4 border-b border-slate-700 flex items-center justify-between bg-[#111C3D]">
+        <h3 id="modal-title" class="font-bold text-white text-base">Specification Details</h3>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div id="modal-content" class="p-6 overflow-y-auto text-xs sm:text-sm text-slate-200 space-y-4 leading-relaxed">
+        <!-- Dynamic content filled by JS -->
+      </div>
+      <div class="p-4 border-t border-slate-700 bg-[#111C3D] flex justify-between items-center">
+        <button onclick="explainInAi()" class="px-4 py-2 bg-violet-600 hover:bg-violet-500 text-white text-xs font-semibold rounded-xl flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span>Explain with AI (Roman Urdu)</span>
+        </button>
+        <button onclick="closeModal()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 bg-[#0B132B] py-6 text-center text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>&copy; 2026 Governor Sindh IT Initiative (GIAIC) &bull; Panaversity Ecosystem</p>
+      <div class="flex items-center space-x-4 text-slate-400">
+        <span class="text-emerald-400 font-semibold flex items-center gap-1">
+          <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Vercel & GitHub Deployment Ready
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Tab Switching
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId).classList.remove('hidden');
+
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('text-white', 'bg-blue-600/30', 'border', 'border-blue-500/40', 'font-semibold');
+        btn.classList.add('text-slate-400', 'font-medium');
+      });
+
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-400', 'font-medium');
+        activeBtn.classList.add('text-white', 'bg-blue-600/30', 'border', 'border-blue-500/40', 'font-semibold');
+      }
+    }
+
+    // Modal Specifications
+    let currentActiveSpec = "";
+    const specsData = {
+      'agent-factory': {
+        title: "The Agent Factory Architectural Pattern",
+        content: `
+          <p class="font-semibold text-blue-400">Abstract:</p>
+          <p>The Agent Factory pattern replaces ad-hoc prompt crafting with automated, industrial assembly of deterministic AI agents. Each agent is constructed from explicit manifests defining strict JSON schemas for inputs and outputs.</p>
+          <div class="p-3 bg-slate-900 rounded-xl border border-slate-800 font-mono text-xs text-emerald-300">
+            [Specification Contract] &rarr; [Schema Validator (Zod)] &rarr; [Dual Sandboxed Runtime] &rarr; [Verification Gate]
+          </div>
+          <p class="font-semibold text-slate-200">Key Pillars:</p>
+          <ul class="list-disc pl-5 space-y-1 text-slate-300">
+            <li><strong>Deterministic Tool Invocation:</strong> LLMs never execute code directly without contract validation.</li>
+            <li><strong>Dual Sandboxing:</strong> Separation between evaluation environment and host system.</li>
+            <li><strong>Automated Self-Correction:</strong> When a tool returns a typed error, the agent corrects its parameters instead of failing silently.</li>
+          </ul>
+        `
+      },
+      'context-engineering': {
+        title: "Context Engineering & Memory Management",
+        content: `
+          <p class="font-semibold text-emerald-400">Abstract:</p>
+          <p>Context window degradation is the primary cause of hallucination in multi-step workflows. Context engineering treats the LLM's prompt space as a finite, budgeted cache rather than an infinite dump.</p>
+          <p class="font-semibold text-slate-200">Strategies:</p>
+          <ul class="list-disc pl-5 space-y-1 text-slate-300">
+            <li><strong>Hierarchical Rolling Summaries:</strong> Older turns are iteratively compressed into dense factual bullet points.</li>
+            <li><strong>Semantic RAG Filtering:</strong> Only top-k cosine-similarity embeddings are injected per task.</li>
+            <li><strong>Working Scratchpad:</strong> Agents maintain an external key-value state for task variables.</li>
+          </ul>
+        `
+      },
+      'spec-driven': {
+        title: "Spec-Driven Development for Agentic Systems",
+        content: `
+          <p class="font-semibold text-violet-400">Abstract:</p>
+          <p>Traditional TDD assumes human-authored logic. Spec-Driven Development (SDD) provides the deterministic guardrails required when generative models write code.</p>
+          <p class="text-slate-300">By defining invariants and types prior to execution, synthetic agents achieve up to 98% pass rates on complex software milestones.</p>
+        `
+      },
+      'seven-principles': {
+        title: "Seven Principles of Agentic Engineering",
+        content: `
+          <p class="font-semibold text-amber-400">Core Axioms:</p>
+          <ol class="list-decimal pl-5 space-y-1.5 text-slate-300">
+            <li><strong>Determinism over Guesswork:</strong> Ground every output with schema validation.</li>
+            <li><strong>Least Privilege Execution:</strong> Tools only receive the permissions needed for the active step.</li>
+            <li><strong>Observability by Default:</strong> Log every reasoning step, tool call, and token metric.</li>
+            <li><strong>Human-in-the-Loop Safeguards:</strong> High-risk operations require explicit human confirmation.</li>
+            <li><strong>Graceful Degradation:</strong> Fail to safe fallbacks when APIs or models encounter outages.</li>
+            <li><strong>Stateless Compute, Stateful Storage:</strong> Keep agents stateless while storing progress in reliable databases.</li>
+            <li><strong>Continuous Verification:</strong> Run automated assertions before accepting any agent-generated artifact.</li>
+          </ol>
+        `
+      }
+    };
+
+    function readSpec(specKey) {
+      currentActiveSpec = specKey;
+      const data = specsData[specKey];
+      if (data) {
+        document.getElementById('modal-title').innerText = data.title;
+        document.getElementById('modal-content').innerHTML = data.content;
+        document.getElementById('spec-modal').classList.remove('hidden');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('spec-modal').classList.add('hidden');
+    }
+
+    function explainInAi() {
+      closeModal();
+      switchTab('ai-study');
+      const spec = specsData[currentActiveSpec];
+      if (spec) {
+        setAiPrompt(`Mujhe "${spec.title}" asaan Roman Urdu mein samjhayein aur batayein GIAIC exam mein iska kya question aa sakta hai?`);
+      }
+    }
+
+    // AI Assistant Chat Simulator
+    function setAiPrompt(promptText) {
+      document.getElementById('chat-input').value = promptText;
+      sendChatMessage();
+    }
+
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chatContainer = document.getElementById('chat-messages');
+
+      // User Message
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex items-start justify-end space-x-3";
+      userBubble.innerHTML = `
+        <div class="bg-blue-600 p-3.5 rounded-2xl rounded-tr-none text-white max-w-xl text-xs sm:text-sm">
+          <p>${escapeHtml(text)}</p>
+        </div>
+      `;
+      chatContainer.appendChild(userBubble);
+      input.value = "";
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+
+      // Simulated Intelligent Response
+      setTimeout(() => {
+        const botBubble = document.createElement('div');
+        botBubble.className = "flex items-start space-x-3 max-w-2xl";
+
+        let responseContent = "";
+        const lower = text.toLowerCase();
+
+        if (lower.includes("urdu") || lower.includes("roman urdu") || lower.includes("kya hota hai") || lower.includes("samjhayein")) {
+          responseContent = `
+            <p class="font-semibold text-emerald-400">Bilkul! Roman Urdu mein asaan explanation:</p>
+            <p><strong>Agent Factory</strong> ka matlab hai ek aisi factory jo AI Agents ko automatically aur safe tareeqay se banati hai. Aam tor par log ChatGPT ya model ko aese hi prompt de dete hain jisse hallucination hoti hai. Lekin Agent Factory mein:</p>
+            <ul class="list-disc pl-4 space-y-1 text-slate-300">
+              <li>Har agent ko strict <strong>JSON Schema</strong> di jati hai ke woh galat parameters pass na kare.</li>
+              <li>Agent ko ek <strong>Sandbox (isolated room)</strong> mein chalaya jata hai taake computer safe rahe.</li>
+              <li>Agar koi error aaye, to agent khud usko analyze karke theek karta hai (OODA Loop).</li>
+            </ul>
+            <p class="text-xs text-violet-300 mt-2">💡 GIAIC Exam Tip: Agent Factory ka core advantage 'deterministic contract validation' aur 'safety sandboxing' hai!</p>
+          `;
+        } else if (lower.includes("mcq") || lower.includes("quiz")) {
+          responseContent = `
+            <p class="font-semibold text-violet-300">Context Engineering Practice MCQs:</p>
+            <ol class="list-decimal pl-4 space-y-2 text-slate-200">
+              <li><strong>Q:</strong> What is the main drawback of exceeding the LLM context window?<br><span class="text-slate-400 text-xs">Ans: Attention degradation and high hallucination rate.</span></li>
+              <li><strong>Q:</strong> Which technique compresses past conversation turns into factual bullets?<br><span class="text-slate-400 text-xs">Ans: Hierarchical Rolling Summaries.</span></li>
+            </ol>
+          `;
+        } else {
+          responseContent = `
+            <p class="text-slate-200">In GIAIC and Panaversity agentic systems, <strong>deterministic engineering</strong> is paramount. Rather than relying purely on probabilistic language generation, we enforce strict boundary checks, schema validation (via Zod or Pydantic), and isolated sandbox testbeds.</p>
+            <p class="text-xs text-blue-300 mt-2">Would you like me to generate code sample or explain this in Roman Urdu?</p>
+          `;
+        }
+
+        botBubble.innerHTML = `
+          <div class="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center flex-shrink-0 text-white">
+            <i data-lucide="bot" class="w-4 h-4"></i>
+          </div>
+          <div class="bg-slate-800/90 border border-slate-700 p-3.5 rounded-2xl rounded-tl-none space-y-2 text-xs sm:text-sm">
+            <p class="font-semibold text-violet-300 text-xs">GIAIC AI Study Mentor</p>
+            <div class="text-slate-200 leading-relaxed">${responseContent}</div>
+          </div>
+        `;
+        chatContainer.appendChild(botBubble);
+        lucide.createIcons();
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }, 600);
+    }
+
+    function escapeHtml(string) {
+      return String(string).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    // Coding Lab
+    function runCodeSimulation() {
+      const consoleEl = document.getElementById('code-console');
+      consoleEl.innerHTML = `<span class="text-amber-400">Compiling TypeScript...</span>`;
+      setTimeout(() => {
+        consoleEl.innerHTML = `
+          <div class="text-emerald-400">[OBSERVE] Goal: Synthesize Q3 Panaversity Specification</div>
+          <div class="text-slate-300">[ORIENT] Token Window: 12,400 tokens / 128k budget (OK)</div>
+          <div class="text-blue-400">[DECIDE] Dispatching deterministic tool: "spec_validator"</div>
+          <div class="text-emerald-400">[ACT] Invariants verified! Result: { status: 'SUCCESS', verified: true }</div>
+        `;
+      }, 500);
+    }
+
+    function loadCodeSnippet(type) {
+      const editor = document.getElementById('code-editor');
+      if (type === 'schema') {
+        editor.value = `// Panaversity Spec: Zod Schema Tool Contract
+import { z } from "zod";
+
+export const ExecuteAgentTaskSchema = z.object({
+  taskId: z.string().uuid(),
+  objective: z.string().min(5),
+  maxTokens: z.number().int().positive().default(4000),
+  sandboxed: z.literal(true) // Enforces safety invariant
+});
+
+export type ExecuteAgentTaskInput = z.infer<typeof ExecuteAgentTaskSchema>;
+console.log("Contract validated for autonomous dispatcher.");`;
+      } else {
+        editor.value = `// Panaversity Agent Factory: OODA Loop Runner
+class AutonomousAgent {
+  async runOodaCycle(goal: string) {
+    console.log("[OBSERVE] Goal: " + goal);
+    console.log("[ORIENT] Evaluating context...");
+    console.log("[DECIDE] Selected tool: deterministic_retriever");
+    console.log("[ACT] Tool executed cleanly.");
+  }
+}
+new AutonomousAgent().runOodaCycle("Synthesize Panaversity Spec");`;
+      }
+    }
+
+    // Quiz Options
+    function selectQuizOption(btn, isCorrect) {
+      const feedback = document.getElementById('quiz-feedback');
+      document.querySelectorAll('#quiz-options button').forEach(b => {
+        b.classList.remove('border-emerald-500', 'bg-emerald-500/20', 'border-rose-500', 'bg-rose-500/20');
+      });
+
+      if (isCorrect) {
+        btn.classList.add('border-emerald-500', 'bg-emerald-500/20');
+        feedback.className = "p-3 rounded-xl text-xs bg-emerald-500/20 border border-emerald-500/40 text-emerald-300";
+        feedback.innerHTML = "<strong>Correct! 🎉</strong> Strict JSON schemas guarantee that the LLM cannot hallucinate unexpected properties or destructive arguments.";
+      } else {
+        btn.classList.add('border-rose-500', 'bg-rose-500/20');
+        feedback.className = "p-3 rounded-xl text-xs bg-rose-500/20 border border-rose-500/40 text-rose-300";
+        feedback.innerHTML = "<strong>Incorrect.</strong> Try option B: The key reason is to enforce typed JSON-schema contracts to prevent hallucinated tool arguments.";
+      }
+      feedback.classList.remove('hidden');
+    }
+  </script>
 </body>
 </html>
