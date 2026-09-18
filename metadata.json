@@ -1,0 +1,6 @@
+{
+  "name": "Student Hub",
+  "description": "Comprehensive student companion for GIAIC and Panaversity learners with official learning resources, AI study assistant, quizzes, smart notes, coding lab, and progress tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
